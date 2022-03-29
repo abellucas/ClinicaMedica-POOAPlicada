@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="titulo">Gerenciar Médico</ui:define>
+	
+	<ui:define name="conteudo">
+	
+		<p:fieldset legend="Cadastrar Médico">
+		<h:form id="formMedico">
+		
+			<p:growl life="4000"/>
+			
+			<h:panelGrid columns="2">
+			
+				<p:outputLabel value="Nome" for="nomeMedico"/>
+				<p:inputText value="#{medicoBean.medico.primeiroNome}" id="nomeMedico"
+				required="true" requiredMessage="O Nome do Médico precisa ser informado"/>
+				
+				<p:outputLabel value="Sobrenome" for="sobrenomeMedico"/>
+				<p:inputText value="#{medicoBean.medico.sobrenome}" id="sobrenomeMedico"
+				required="true" requiredMessage="O Sobrenome do Médico precisa ser informado"/>
+				
+				<p:outputLabel value="Telefone" for="telefone"/>
+				<p:inputText value="#{medicoBean.medico.telefone}" id="telefone"
+				required="true" requiredMessage="O telefone de contato precisa ser informado"/>
+				
+				<p:outputLabel value="Celular" for="celular"/>
+				<p:inputText value="#{medicoBean.medico.celular}" id="celular"
+				required="true" requiredMessage="O celular precisa ser informado"/>
+				
+				<p:outputLabel value="Data de Nascimento" for="datanasc"/>
+				<p:calendar value="#{medicoBean.medico.nascimento}" id="datanasc" required="true" requiredMessage="A data de nascimento precisa ser informada"></p:calendar>
+				
+				<p:outputLabel value="CRM" for="crm"/>
+				<p:inputText value="#{medicoBean.medico.crm}" id="crm"
+				required="true" requiredMessage="O CRM precisa ser informado"/>
+				
+				<p:outputLabel value="Especialidade" for="especialidade"/>
+				<p:inputText value="#{medicoBean.medico.especialidade}" id="especialidade"
+				required="true" requiredMessage="A especialidade precisa ser informada"/>
+				
+				<p:spacer>
+				<p:commandButton value="Gravar" action="#{medicoBean.gravarMedico()}"
+				process="@form" update="@form, :formList"/>
+				</p:spacer>
+				
+			</h:panelGrid>
+		</h:form>
+		</p:fieldset>
+		
+		<p:fieldset legend="Lista de Médicos Registrados" toggleable="true" collapsed="true">
+		<h:form id="formList">
+		<h:dataTable value = "#{medicoBean.medicos}" var = "medicoAtual" border = "1" bgcolor="Silver">
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{medicoAtual.nomeCompleto}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Telefone</f:facet>
+					<h:outputText value="#{medicoAtual.telefone}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Celular</f:facet>
+					<h:outputText value="#{medicoAtual.celular}"/> 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Data de Nascimeto</f:facet>
+					<h:outputText value="#{medicoAtual.nascimento}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">CRM</f:facet>
+					<h:outputText value="#{medicoAtual.crm}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Especiaidade</f:facet>
+					<h:outputText value="#{medicoAtual.especialidade}"/>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Ações</f:facet>
+					<h:commandButton action="#{medicoBean.carregarMedico(medicoAtual)}" value="Editar"
+					process="@form" update="@form, :formMedico"/>
+					<h:commandButton action="#{medicoBean.excluirMedico(medicoAtual)}" value="Excluir"
+					process="@form" update="@form, :formMedico"/>
+				</h:column>
+		</h:dataTable>
+	</h:form>
+	</p:fieldset>
+	</ui:define>
+</ui:composition>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/files/estilo.css"/>
+	<script type="text/javascript" src="#{request.contextPath}/files/js-locale-msg.js"/>
+</h:head> 
+
+<body style="background-color: #167D7F;"> 
+
+	<div class="pagina">
+	<div class="cabecalho" style="background-color: #167D7F;">
+					<div class="titulo">
+						<h1><ui:insert name="titulo"></ui:insert></h1>
+					</div>
+			<h:form>
+					<p:menubar>
+						<p:menuitem value="Início" action="paginainicial?faces-redirect=true"/>
+						<p:menuitem value="Gerenciar Médico" action="GerenciaMedico?faces-redirect=true"/>
+						<p:menuitem value="Lançar Atendimento" action="LancarAtendimento?faces-redirect=true"/>
+					</p:menubar>
+			</h:form>
+	</div>
+	
+	<div class="conteudo">
+		<ui:insert name="conteudo"></ui:insert>
+	</div>
+</div>
+
+<div class="rodape" style="background-color: #167D7F;">
+	<h:outputText value="Feito por Abel Lucas e Gabriel Rodrigues"/>
+</div>
+
+</body> 
+</html>
