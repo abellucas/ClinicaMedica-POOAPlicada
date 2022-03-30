@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -24,7 +26,9 @@ public class Atendimento {
 	
 	
 	private Date dataEntrada;
-	private String especialidade;
+	
+	@Enumerated(EnumType.STRING)
+	private Situacao situacao;
 	
 	public Atendimento() {
 		
@@ -36,14 +40,6 @@ public class Atendimento {
 
 	public void setDataEntrada(Date dataEntrada) {
 		this.dataEntrada = dataEntrada;
-	}
-
-	public String getEspecialidade() {
-		return especialidade;
-	}
-
-	public void setEspecialidade(String especialidade) {
-		this.especialidade = especialidade;
 	}
 
 	public Long getIdAtendimento() {
@@ -68,5 +64,13 @@ public class Atendimento {
 
 	public void setMedicos(List<Medico> medicos) {
 		this.medicos = medicos;
+	}
+
+	public Situacao getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(Situacao situacao) {
+		this.situacao = situacao;
 	}
 }

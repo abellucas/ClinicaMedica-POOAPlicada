@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -21,6 +23,8 @@ public class Pessoa {
 	private String sobrenome;
 	private String telefone;
 	private String celular;
+	
+	@Temporal (TemporalType.DATE)
 	private Date nascimento;
 	
 	@OneToOne (cascade = CascadeType.ALL)
@@ -77,8 +81,6 @@ public class Pessoa {
 		this.endereco = endereco;
 	}
 	
-	
-
 	public String getCelular() {
 		return celular;
 	}

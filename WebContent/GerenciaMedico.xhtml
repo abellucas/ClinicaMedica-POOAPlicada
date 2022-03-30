@@ -11,6 +11,7 @@
 	<ui:define name="conteudo">
 	
 		<p:fieldset legend="Cadastrar Médico">
+		
 		<h:form id="formMedico">
 		
 			<p:growl life="4000"/>
@@ -54,6 +55,7 @@
 		</p:fieldset>
 		
 		<p:fieldset legend="Lista de Médicos Registrados" toggleable="true" collapsed="true">
+		
 		<h:form id="formList">
 		<h:dataTable value = "#{medicoBean.medicos}" var = "medicoAtual" border = "1" bgcolor="Silver">
 				<h:column>
