@@ -18,13 +18,13 @@ public class AtendimentoService extends GenericService<Atendimento>{
 	public Paciente BuscarPorCPF(String cpf){
 			
 			final CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+			
 			final CriteriaQuery<Paciente> criteriaQuery = criteriaBuilder.createQuery(Paciente.class);
 			
 			final Root<Paciente> paciente = criteriaQuery.from(Paciente.class);
 			
-			criteriaQuery.select(paciente);
+			criteriaQuery.select(paciente).where(criteriaBuilder.equal(paciente.get("cpf"), cpf));
 			
-			criteriaQuery.where(criteriaBuilder.equal(paciente.get("cpf"), cpf));
 			Paciente p = getEntityManager().createQuery(criteriaQuery).getSingleResult();
 			
 			return p;

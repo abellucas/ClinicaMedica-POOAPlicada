@@ -18,11 +18,10 @@
 			<h:panelGrid columns="2">
 			
 				<p:outputLabel value="Informe o CPF do Paciente" for="cpfpaciente"/>
-				<p:inputText value="#{atendimentoBean.paciente.cpf}" id="cpfpaciente"
+				<p:inputText value="#{atendimentoBean.atendimento.paciente.cpf}" id="cpfpaciente"
 				required="true" requiredMessage="O CPF do paciente precisa ser informado para realizar a busca!"/>
 				
-				<p:commandButton value="Buscar" action="#{atendimentoBean.buscarPorCPF()}"
-				process="@form" update="@form, :formAtendimento"/>
+				<p:commandButton value="Buscar" action="#"/>
 				
 			</h:panelGrid>
 		</h:form>
@@ -36,48 +35,48 @@
 			<h:panelGrid columns="2">
 				
 				<p:outputLabel value="CPF" for="cpf"/>
-				<p:inputText value="#{atendimentoBean.paciente.cpf}" id="cpf"
+				<p:inputText value="#{atendimentoBean.atendimento.paciente.cpf}" id="cpf"
 				required="true" requiredMessage="O CPF do paciente precisa ser informado!"/>
 				
 				<p:outputLabel value="Nome do Paciente" for="nome"/>
-				<p:inputText value="#{atendimentoBean.paciente.primeiroNome}" id="nome"
+				<p:inputText value="#{atendimentoBean.atendimento.paciente.primeiroNome}" id="nome"
 				required="true" requiredMessage="O Nome do paciente precisa ser informado!"/>
 				
 				<p:outputLabel value="Sobrenome do Paciente" for="sobrenome"/>
-				<p:inputText value="#{atendimentoBean.paciente.sobrenome}" id="sobrenome"
+				<p:inputText value="#{atendimentoBean.atendimento.paciente.sobrenome}" id="sobrenome"
 				required="true" requiredMessage="O Sobrenome do paciente precisa ser informado!"/>
 				
 				<p:outputLabel value="Data de Nascimento" for="datanasc"/>
-				<p:calendar value="#{atendimentoBean.paciente.nascimento}" id="datanasc" 
+				<p:calendar value="#{atendimentoBean.atendimento.paciente.nascimento}" id="datanasc" 
 				required="true" requiredMessage="A data de nascimento precisa ser informada">
 				</p:calendar>
 				
 				<p:outputLabel value="Telefone do Paciente" for="telefone"/>
-				<p:inputText value="#{atendimentoBean.paciente.telefone}" id="telefone"
+				<p:inputText value="#{atendimentoBean.atendimento.paciente.telefone}" id="telefone"
 				required="true" requiredMessage="O Sobrenome do paciente precisa ser informado!"/>
 				
 				<p:outputLabel value="Celular do Paciente" for="celular"/>
-				<p:inputText value="#{atendimentoBean.paciente.celular}" id="celular"
+				<p:inputText value="#{atendimentoBean.atendimento.paciente.celular}" id="celular"
 				required="true" requiredMessage="O Celular do paciente precisa ser informado!"/>
 				
 				<p:outputLabel value="Rua" for="rua"/>
-				<p:inputText value="#{atendimentoBean.paciente.endereco.rua}" id="rua"
+				<p:inputText value="#{atendimentoBean.atendimento.paciente.endereco.rua}" id="rua"
 				required="true" requiredMessage="A rua precisa ser informada"/>
 				
 				<p:outputLabel value="Bairro" for="bairro"/>
-				<p:inputText value="#{atendimentoBean.paciente.endereco.bairro}" id="bairro"
+				<p:inputText value="#{atendimentoBean.atendimento.paciente.endereco.bairro}" id="bairro"
 				required="true" requiredMessage="O bairro precisa ser informado"/>
 				
 				<p:outputLabel value="Numero" for="numero"/>
-				<p:inputText value="#{atendimentoBean.paciente.endereco.numero}" id="numero"
+				<p:inputText value="#{atendimentoBean.atendimento.paciente.endereco.numero}" id="numero"
 				required="true" requiredMessage="O número precisa ser informado"/>
 				
 				<p:outputLabel value="CEP" for="cep"/>
-				<p:inputText value="#{atendimentoBean.paciente.endereco.cep}" id="cep"
+				<p:inputText value="#{atendimentoBean.atendimento.paciente.endereco.cep}" id="cep"
 				required="true" requiredMessage="O CEP precisa ser informado"/>
 				
 				<p:outputLabel value="Cidade" for="cidade"/>
-				<p:inputText value="#{atendimentoBean.paciente.endereco.cidade}" id="cidade"
+				<p:inputText value="#{atendimentoBean.atendimento.paciente.endereco.cidade}" id="cidade"
 				required="true" requiredMessage="A cidade precisa ser informada"/>
 				
 				<h:outputText value="Selecione o Médico " for="medicoAtendimento"/>
@@ -144,10 +143,10 @@
 					<h:column>
 					<f:facet name="header">Ações</f:facet>
 					<h:commandButton action="#{atendimentoBean.carregarAtendimento(atendimentoAtual)}" value="Editar"
-					process="@form" update="@form, :formqualquer"/>
+					process="@form" update="@form, :formAtendimento"/>
 					
 					<h:commandButton action="#{atendimentoBean.excluirAtendimento(atendimentoAtual)}" value="Excluir"
-					process="@form" update="@form, :formqualquer"/>
+					process="@form" update="@form, :formAtendimento"/>
 					</h:column>
 				
 		</h:dataTable>

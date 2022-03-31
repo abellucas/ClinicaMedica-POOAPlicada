@@ -30,32 +30,32 @@ public class AtendimentoBean {
 	@EJB
 	private MedicoService medicoService;
 	
-	private Paciente paciente = new Paciente();
 	private Atendimento atendimento = new Atendimento();
-	private Medico medico = new Medico();
 	
-	private String cpf = null;
+	
+	private String cpf;
 	
 	private List<Paciente> pacientes = new ArrayList<Paciente>();
 	private List<Atendimento> atendimentos = new ArrayList<Atendimento>();
 	private List<Medico> medicos = new ArrayList<Medico>();
 	
 	private Long pacienteAtual = 0L;
+	private Long medicoAtual = 0L;
 	private Long atendimentoAtual = 0L;
 	
 	@PostConstruct
 	public void init() {
-		listaMedico();
 		listaPaciente();
+		listaMedico();
 		listaAtendimento();
+	}
+	
+	private void listaPaciente() {
+		pacientes = pacienteService.listAll();
 	}
 	
 	private void listaMedico() {
 		medicos = medicoService.listAll();
-	}
-	
-	private void listaPaciente() {
-		pacientes = pacienteService.listAll();	
 	}
 	
 	private void listaAtendimento() {
@@ -64,56 +64,43 @@ public class AtendimentoBean {
 	
 	public void gravarAtendimento() {
 		String msg = "";
+		Paciente p = pacienteService.obtemPorId(pacienteAtual);
 		
 		if(atendimento.getIdAtendimento() == null) {
 			
-			pacienteService.create(paciente);
-			medicoService.create(medico);
+			atendimento.setPaciente(p);
+			atendimento.setMedicos(medicos);
 			atendimentoService.create(atendimento);
-			
 			msg=" gravado";
+			
 		} else {
 			/*atendimentoService.merge(atendimento);
 			msg=" atualizado";*/
 		}
-		FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage("Atendimento do Paciente "+ paciente.getNomeCompleto() + msg + " com sucesso!"));
-		
-		medico = new Medico();
-		paciente = new Paciente();
+		FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage("Atendimento do Paciente "+ p.getNomeCompleto() + msg + " com sucesso!"));
 		atendimento = new Atendimento();
-		
-		listaMedico();
+		pacienteAtual = 0L;
 		listaPaciente();
+		listaMedico();
 		listaAtendimento();
 	}
 	
-	public void buscarPorCPF() {
+	/*public void buscarPorCPF() {
 		System.out.println(cpf);
-		paciente = atendimentoService.BuscarPorCPF(cpf);
-		/*if(paciente.getCpf() == null) {
-			listaPaciente();
-		} else {
-			
-		}*/
-		
-	}
+		atendimento = atendimentoService.BuscarPorCPF(cpf);
+	}*/
 		
 	public void carregarAtendimento(Atendimento a) {
 		setAtendimento(a);
 		atendimentoAtual = a.getIdAtendimento();
 	}
 	
-	public void cancelar() {
-		paciente = new Paciente();
-		listaPaciente();
-	}
-	
 	public void excluirAtendimento(Paciente p, Medico m, Atendimento a ) {
 		String msg = "";
 		try{
 			msg = p.getNomeCompleto()+", removido(a) com sucesso!";
-			pacienteService.remove(p);
-			medicoService.remove(m);
+			atendimento.setPaciente(p);
+			atendimento.setMedicos(medicos);
 			atendimentoService.remove(a);
 			
 		}catch (Exception e) {
@@ -132,14 +119,6 @@ public class AtendimentoBean {
 
 	public void setPacienteService(PacienteService pacienteService) {
 		this.pacienteService = pacienteService;
-	}
-
-	public Paciente getPaciente() {
-		return paciente;
-	}
-
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
 	}
 
 	public List<Paciente> getPacientes() {
@@ -198,14 +177,6 @@ public class AtendimentoBean {
 		this.medicoService = medicoService;
 	}
 
-	public Medico getMedico() {
-		return medico;
-	}
-
-	public void setMedico(Medico medico) {
-		this.medico = medico;
-	}
-
 	public List<Medico> getMedicos() {
 		return medicos;
 	}
@@ -221,6 +192,12 @@ public class AtendimentoBean {
 	public void setAtendimentoAtual(Long atendimentoAtual) {
 		this.atendimentoAtual = atendimentoAtual;
 	}
-	
-	
+
+	public Long getMedicoAtual() {
+		return medicoAtual;
+	}
+
+	public void setMedicoAtual(Long medicoAtual) {
+		this.medicoAtual = medicoAtual;
+	}
 }
